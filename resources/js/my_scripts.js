@@ -57,7 +57,7 @@ function viewStudentStats(id, toggle){
 					 provided parameter.
 */
 function changeColor(color){
-	document.body.style.backgroundColor = color
+	document.body.style.backgroundColor = color;
 }
 
 
@@ -119,7 +119,18 @@ function loadStatsPage(){
 					As a note, the id for the dropdown menu is player_selector.
 */
 function loadPlayersPage(){
+	var dropdown = document.getElementById('player_selector');
+	for(var i = 0; i < players.length; i++){
+		var option_temp = document.createElement("button");
+		option_temp.setAttribute('onclick','switchPlayers(${i})');
 
+		var option_data = document.createElement("a");
+		option_data.setAttribute('href',"#");
+
+		option_data.text = players[i]['name'];
+		option_temp.appendChild(option_data);
+		dropdown.appendChild(option_temp, dropdown[i]);
+	}
 }
 /*
 		switchPlayers(playerNum) method:
@@ -144,6 +155,16 @@ function loadPlayersPage(){
 					  avg_r_yards   - the average number of rushing yards for the player's Buff career
 					  avg_rec_yards - the average number of receiving yards for the player's Buff career
 */
-function switchPlayers(plaeyerNum){
-	
+function switchPlayers(playerNum){
+	document.getElementById("p_year").innerHTML = players[playerNum]["year"]
+	document.getElementById("p_major").innerHTML = players[playerNum]["major"];
+	document.getElementById("g_played").innerHTML = players[playerNum]["games_played"];
+	document.getElementById("player_img").innerHTML = players[playerNum]["img"];
+	document.getElementById("p_yards").innerHTML = players[playerNum]["pass_yards"];
+	document.getElementById("r_yards").innerHTML = players[playerNum]["rushing_yards"];
+	document.getElementById("rec_yards").innerHTML = players[playerNum]["receiving_yards"];
+
+	document.getElementById("avg_p_yards").innerHTML = players[playerNum]["pass_yards"] / players[playerNum]["games_played"];
+	document.getElementById("avg_r_yards").innerHTML = players[playerNum]["rushing_yards"] / players[playerNum]["games_played"];
+	document.getElementById("avg_rec_yards").innerHTML = players[playerNum]["receiving_yards"] / players[playerNum]["games_played"];
 }
